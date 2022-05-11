@@ -5,7 +5,7 @@ class ServicoDeVendas {
 
     try {
       let resposta = await fetch(url, {
-        mode: 'no-cors'
+        mode: "no-cors"
       });
       if (resposta.ok) {
         let aprovacao = await resposta.json();
@@ -25,7 +25,7 @@ class ServicoDeVendas {
 
     try {
       let resposta = await fetch(url, {
-        mode: 'no-cors'
+        mode: "no-cors"
       });
       if (resposta.ok) {
         let aprovacao = await resposta.json();
@@ -53,7 +53,7 @@ class ServicoDeVendas {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(param),
       method: "POST",
-      mode: 'no-cors'
+      mode: "no-cors"
     };
 
     try {
@@ -80,7 +80,7 @@ class ServicoDeVendas {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(param),
       method: "POST",
-      mode: 'no-cors'
+      mode: "no-cors"
     };
 
     try {
@@ -101,7 +101,7 @@ class ServicoDeVendas {
 
     try {
       let resposta = await fetch(url, {
-        mode: 'no-cors'
+        mode: "no-cors"
       });
       if (resposta.ok) {
         let dados = await resposta.json();
