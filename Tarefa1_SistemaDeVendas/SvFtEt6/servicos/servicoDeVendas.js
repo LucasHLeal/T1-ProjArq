@@ -4,7 +4,9 @@ class ServicoDeVendas {
     url += "?codProd=" + codigo + "&qtdade=" + quantidade;
 
     try {
-      let resposta = await fetch(url);
+      let resposta = await fetch(url, {
+        mode: 'no-cors'
+      });
       if (resposta.ok) {
         let aprovacao = await resposta.json();
         return aprovacao;
@@ -22,7 +24,9 @@ class ServicoDeVendas {
     url += "?endereco=" + encodeURIComponent(endereco);
 
     try {
-      let resposta = await fetch(url);
+      let resposta = await fetch(url, {
+        mode: 'no-cors'
+      });
       if (resposta.ok) {
         let aprovacao = await resposta.json();
         return aprovacao;
@@ -49,6 +53,7 @@ class ServicoDeVendas {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(param),
       method: "POST",
+      mode: 'no-cors'
     };
 
     try {
@@ -75,6 +80,7 @@ class ServicoDeVendas {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(param),
       method: "POST",
+      mode: 'no-cors'
     };
 
     try {
@@ -94,7 +100,9 @@ class ServicoDeVendas {
     const produtos = [];
 
     try {
-      let resposta = await fetch(url);
+      let resposta = await fetch(url, {
+        mode: 'no-cors'
+      });
       if (resposta.ok) {
         let dados = await resposta.json();
         for (let i = 0; i < dados.length; i++) {
