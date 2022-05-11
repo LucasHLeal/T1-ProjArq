@@ -129,7 +129,8 @@ function bindClear(btn) {
 
 // Inicialização
 async function init() {
-  servico = new ServicoDeVendas("https://8080-lucashleal-t1projarq-8yykfcppq1a.ws-us44.gitpod.io");
+  // servico = new ServicoDeVendas("https://8080-lucashleal-t1projarq-8yykfcppq1a.ws-us44.gitpod.io");
+  servico = new ServicoDeVendas("http://localhost:8080");
 
   carrinho = new CarrinhoView(new Carrinho(), carrinhoRoot);
   produtos = new ProdutoListView(servico, produtosRoot);
