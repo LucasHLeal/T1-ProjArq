@@ -1,6 +1,9 @@
 package com.bcopstein.Negocio.entidades;
+import javax.persistence.*;
 
+@Entity
 public class ItemCarrinho {
+  @Id
   private int codigo;
   private int quantidade;
 
@@ -8,6 +11,8 @@ public class ItemCarrinho {
     this.codigo = codigo;
     this.quantidade = quantidade;
   }
+
+  protected ItemCarrinho() {}
 
   public int getCodigo() {
     return codigo;

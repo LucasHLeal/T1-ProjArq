@@ -1,6 +1,9 @@
 package com.bcopstein.Negocio.entidades;
+import javax.persistence.*;
 
+@Entity
 public class Produto {
+  @Id
   private int codigo;
   private String descricao;
   private double preco;
@@ -12,6 +15,8 @@ public class Produto {
     this.preco = preco;
     this.qtdade = qtdade;
   }
+
+  protected Produto() {}
 
   public int getCodigo() {
     return codigo;

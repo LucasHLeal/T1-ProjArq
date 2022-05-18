@@ -1,4 +1,4 @@
-package com.bcopstein.Adapdadores.controllers;
+package com.bcopstein.Adaptadores.controllers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +24,7 @@ public class Controller {
   private final List<Produto> produtos;
   private final List<String> vendasEfetuadas;
   private final Map<String,Integer> cacheFrete; 
-
+// controller chama os casos de uso que chama os servicos
   public Controller() {
     // Cria cache frete
     cacheFrete = new HashMap<>();
@@ -116,6 +116,7 @@ public class Controller {
     // Verifica se o endereço já está na cache
     if (!cacheFrete.keySet().contains(param.getEndereco())){
       // Calcula o frete 1,00 por km
+      // http://dev.virtualearth.net/REST/v1/Routes?waypoint.1=waypoint1&waypoint.2=waypoint2&distanceUnit=mi&o=json&c=en-GB&key=key
 
       cacheFrete.put(param.getEndereco(),25);
     }
