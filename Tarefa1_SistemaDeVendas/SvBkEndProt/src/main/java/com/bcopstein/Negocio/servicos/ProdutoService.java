@@ -4,17 +4,17 @@ import java.util.List;
 
 import com.bcopstein.Negocio.entidades.Produto;
 
-import com.bcopstein.Negocio.repositorios.IProdutosRepositorio;
+import com.bcopstein.Negocio.repositorios.IProdutoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProdutoService {
-    private IProdutosRepositorio repo;
+    private IProdutoRepository repo;
 
     @Autowired
-    public ProdutoService(IProdutosRepositorio repo) {
+    public ProdutoService(IProdutoRepository repo) {
         this.repo = repo;
     }
 

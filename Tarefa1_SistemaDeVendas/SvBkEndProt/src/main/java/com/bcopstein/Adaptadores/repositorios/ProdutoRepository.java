@@ -3,9 +3,9 @@ package com.bcopstein.Adaptadores.repositorios;
 import java.util.List;
 
 import com.bcopstein.Negocio.entidades.Produto;
-import com.bcopstein.Negocio.repositorios.IProdutosRepositorio;
+import com.bcopstein.Negocio.repositorios.IProdutoRepository;
 
-public class ProdutoRepository implements IProdutosRepositorio {
+public class ProdutoRepository implements IProdutoRepository {
 
     @Override
     public List<Produto> todos() {

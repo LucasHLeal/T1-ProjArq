@@ -4,6 +4,6 @@ import java.util.List;
 
 import com.bcopstein.Negocio.entidades.ItemCarrinho;
 
-public interface IItemCarrinhoRepositorio {
-    List<ItemCarrinho> todos();
+public interface ICalculoImposto {
+  Integer calculaImposto(List<ItemCarrinho> produtos);
 }

@@ -51,7 +51,7 @@ public class Controller {
   public boolean podeVender(@RequestParam final Integer codProd,
                             @RequestParam final Integer qtdade) {
     final boolean disponivel =
-        produtos.stream().anyMatch(p -> p.getCodigo() == codProd && p.getQtdade() >= qtdade);
+        produtos.stream().anyMatch(p -> p.getCodigo() == codProd && p.getQuantidade() >= qtdade);
     return disponivel;
   }
 

@@ -1,25 +1,46 @@
 package com.bcopstein.Negocio.entidades;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class ItemCarrinho {
   @Id
-  private int codigo;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Integer codigo;
+
+  @Column(name = "cod_produto")
+  private Integer codProduto;
+  private Integer precoProd;
   private int quantidade;
 
-  public ItemCarrinho(int codigo, int quantidade) {
-    this.codigo = codigo;
+  public ItemCarrinho(Integer codProduto, Integer precoUnitario, int quantidade) {
+    this.codProduto = codProduto;
+    this.precoProd = precoUnitario;
     this.quantidade = quantidade;
   }
 
-  protected ItemCarrinho() {}
+  public ItemCarrinho() {
 
-  public int getCodigo() {
-    return codigo;
   }
 
-  public void setCodigo(int codigo) {
-    this.codigo = codigo;
+ public Integer getCodProduto() {
+    return codProduto;
+  }
+
+  public void setCodProduto(Integer codProduto) {
+    this.codProduto = codProduto;
+  }
+
+  public Integer getPrecoProd() {
+    return precoProd;
+  }
+
+  public void setPrecoProd(Integer precoProd) {
+    this.precoProd = precoProd;
   }
 
   public int getQuantidade() {
@@ -30,8 +51,11 @@ public class ItemCarrinho {
     this.quantidade = quantidade;
   }
 
+ 
+
   @Override
   public String toString() {
-    return "ItemCarrinho [codigo=" + codigo + ", qtd=" + quantidade + "]";
+    return "ItemCarrinho [codProduto=" + codProduto + ", codigo=" + codigo + ", precoUnitario=" + precoProd
+        + ", quantidade=" + quantidade + "]";
   }
 }

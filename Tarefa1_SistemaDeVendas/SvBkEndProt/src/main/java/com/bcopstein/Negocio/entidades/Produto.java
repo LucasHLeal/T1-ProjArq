@@ -1,24 +1,26 @@
 package com.bcopstein.Negocio.entidades;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Produto {
-  @Id
-  private int codigo;
-  private String descricao;
-  private double preco;
-  private int qtdade;
 
-  public Produto(int codigo, String descricao, double preco, int qtdade) {
+  @Id
+  private Integer codigo;
+  private String descricao;
+  private Double preco;
+
+  public Produto(Integer codigo, String descricao, Double preco) {
     this.codigo = codigo;
     this.descricao = descricao;
     this.preco = preco;
-    this.qtdade = qtdade;
   }
 
-  protected Produto() {}
+  public Produto() {
+  }
 
-  public int getCodigo() {
+  public Integer getCodigo() {
     return codigo;
   }
 
@@ -26,25 +28,16 @@ public class Produto {
     return descricao;
   }
 
-  public double getPreco() {
+  public Double getPreco() {
     return preco;
   }
 
-  public int getQtdade() {
-    return qtdade;
-  }
-
-  public void saidaDeProduto(int qtdade) {
-    this.qtdade -= qtdade;
-  }
-
-  public void setPreco(double preco) {
+  public void setPreco(Double preco) {
     this.preco = preco;
   }
 
   @Override
   public String toString() {
-    return "Produto [codigo=" + codigo + ", descricao=" + descricao + ", preco=" + preco
-        + ", qtdade=" + qtdade + "]";
+    return "Produto [codigo=" + codigo + ", descricao=" + descricao + ", preco=" + preco + "]";
   }
 }

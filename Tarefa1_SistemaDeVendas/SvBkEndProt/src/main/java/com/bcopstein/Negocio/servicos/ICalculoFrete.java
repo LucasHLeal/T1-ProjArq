@@ -2,5 +2,5 @@ package com.bcopstein.Negocio.servicos;
 
 
 public interface ICalculoFrete {
-    Float calculaFrete();
+    Float calculaFrete(String origem, String destino);
 }
