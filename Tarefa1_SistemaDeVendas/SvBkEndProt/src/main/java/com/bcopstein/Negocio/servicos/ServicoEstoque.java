@@ -4,9 +4,9 @@ import com.bcopstein.Negocio.entidades.ItemEstoque;
 import com.bcopstein.Negocio.repositorios.IEstoqueRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class ServicoEstoque {
 
   private IEstoqueRepository estoqueRepository;

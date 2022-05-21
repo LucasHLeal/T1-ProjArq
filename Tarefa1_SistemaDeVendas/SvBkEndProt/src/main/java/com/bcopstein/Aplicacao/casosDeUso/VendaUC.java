@@ -1,19 +1,19 @@
-package com.bcopstein.Aplicacao.casosDeUso;
+// package com.bcopstein.Aplicacao.casosDeUso;
 
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * VendaUC
- */
-public class VendaUC {
-    private  servicoEvento;
+// /**
+//  * VendaUC
+//  */
+// public class VendaUC {
+//     private  servicoEvento;
 
-    @Autowired
-    public CadastraEventoUC(ServicoEvento servicoEvento) {
-        this.servicoEvento = servicoEvento;
-    }
+//     @Autowired
+//     public CadastraEventoUC(ServicoEvento servicoEvento) {
+//         this.servicoEvento = servicoEvento;
+//     }
     
-    public void run(Evento evento){
-        servicoEvento.cadastra(evento);
-    }   
-}
+//     public void run(Evento evento){
+//         servicoEvento.cadastra(evento);
+//     }   
+// }

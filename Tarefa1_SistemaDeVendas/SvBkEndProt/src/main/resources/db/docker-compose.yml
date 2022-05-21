@@ -1,0 +1,15 @@
+services:
+  db_ctrlcorredor:
+    image: mysql:latest
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./init.sql:/data/application/init.sql
+      - "./.mysql-data/db:/var/lib/mysql"
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: sistVendas
+      MYSQL_USER: user
+      MYSQL_PASSWORD: admin

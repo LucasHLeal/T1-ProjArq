@@ -5,18 +5,29 @@ import java.util.List;
 import com.bcopstein.Negocio.entidades.Produto;
 import com.bcopstein.Negocio.repositorios.IProdutoRepository;
 
-public class ProdutoRepository implements IProdutoRepository {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
+public class ProdutoRepository implements IProdutoRepository {
+    
+    private IProdutoCrud produtoCrud;
+
+    @Autowired
+    public ProdutoRepository(IProdutoCrud produtoCrud) {
+      this.produtoCrud = produtoCrud;
+    }
+  
     @Override
     public List<Produto> todos() {
-        // TODO Auto-generated method stub
-        return null;
+      return produtoCrud.findAll();
     }
 
     @Override
-    public boolean podeVender(int codProd, int qtdade) {
-        // TODO Auto-generated method stub
-        return false;
+    public void criarProdutos() {
+        //Integer codigo, String descricao, Double preco
+        produtoCrud.save(new Produto(1,"Produto 1", 45.0));
+        produtoCrud.save(new Produto(2,"Produto 2", 5.0));
+        produtoCrud.save(new Produto(3,"Produto 2", 50.0));
     }
-
 }
