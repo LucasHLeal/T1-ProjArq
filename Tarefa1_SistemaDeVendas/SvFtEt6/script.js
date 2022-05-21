@@ -92,7 +92,7 @@ function limparCarrinho() {
 
 async function checkout() {
   let itens = carrinho.carrinho.itens;
-  let confirmou = await servico.confirmaVenda(itens);
+  let confirmou = await servico.confirmaVenda(itens, inpEndereco.value);
 
   console.log(confirmou);
 

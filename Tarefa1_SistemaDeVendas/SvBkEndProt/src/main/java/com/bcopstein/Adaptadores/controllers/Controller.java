@@ -1,14 +1,18 @@
 package com.bcopstein.Adaptadores.controllers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.bcopstein.Aplicacao.dtos.*;
-import com.bcopstein.Negocio.entidades.*;
+import com.bcopstein.Aplicacao.dtos.ParamSubtotal_DTO;
+import com.bcopstein.Aplicacao.casosDeUso.CadastraProdutos;
+import com.bcopstein.Aplicacao.casosDeUso.CadastraVendaUC;
+import com.bcopstein.Aplicacao.casosDeUso.ConsultaProdutosUC;
+import com.bcopstein.Aplicacao.casosDeUso.ConsultaVendaUC;
+import com.bcopstein.Aplicacao.casosDeUso.ConsultaVendasUC;
+import com.bcopstein.Aplicacao.casosDeUso.VerificaEstoqueProdutoUC;
+import com.bcopstein.Negocio.entidades.Produto;
+import com.bcopstein.Negocio.entidades.Venda;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,127 +20,61 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/vendas")
 public class Controller {
-  private final List<Produto> produtos;
-  private final List<String> vendasEfetuadas;
-  private final Map<String,Integer> cacheFrete; 
-// controller chama os casos de uso que chama os servicos
-  public Controller() {
-    // Cria cache frete
-    cacheFrete = new HashMap<>();
-    // Cria e carrega o estoque
-    produtos = new ArrayList<>();
-    produtos.add(new Produto(10, "Geladeira", 2500.0, 10));
-    produtos.add(new Produto(20, "Fogao", 1200.0, 0));
-    produtos.add(new Produto(30, "Lava louça", 4300.0, 7));
-    produtos.add(new Produto(40, "Lava roupa", 3350.0, 11));
-    produtos.add(new Produto(50, "Aspirador de pó", 780.0, 22));
+  private VerificaEstoqueProdutoUC verificaEstoqueProduto;
+  private CadastraVendaUC cadastraVenda;
+  private ConsultaVendaUC consultaVenda;
+  private ConsultaVendasUC consultaVendas;
+  private ConsultaProdutosUC consultaProdutos;
+  private CadastraProdutos cadastraProdutos;
 
-    // Cria a lista de vendas efetuadas
-    vendasEfetuadas = new ArrayList<>();
+  @Autowired
+  public Controller(VerificaEstoqueProdutoUC verificaEstoqueProdutoUC, CadastraVendaUC cadastraVenda,
+      ConsultaVendaUC consultaVenda, ConsultaVendasUC consultaVendas, ConsultaProdutosUC consultaProdutos, CadastraProdutos cadastraProdutos) {
+    this.verificaEstoqueProduto = verificaEstoqueProdutoUC;
+    this.cadastraVenda = cadastraVenda;
+    this.consultaVenda = consultaVenda;
+    this.consultaVendas = consultaVendas;
+    this.consultaProdutos = consultaProdutos;
+    this.cadastraProdutos = cadastraProdutos;
   }
 
   @GetMapping("/produtos")
   @CrossOrigin(origins = "*")
   public List<Produto> listaProdutos() {
-    return produtos;
+    return consultaProdutos.executar();
   }
 
   @GetMapping("/autorizacao")
   @CrossOrigin(origins = "*")
-  public boolean podeVender(@RequestParam final Integer codProd,
-                            @RequestParam final Integer qtdade) {
-    final boolean disponivel =
-        produtos.stream().anyMatch(p -> p.getCodigo() == codProd && p.getQuantidade() >= qtdade);
-    return disponivel;
+  public boolean podeVender(@RequestParam final Integer codProd, @RequestParam final Integer qtdade) {
+    return verificaEstoqueProduto.executar(codProd, qtdade);
   }
 
   @PostMapping("/confirmacao")
   @CrossOrigin(origins = "*")
-  public boolean confirmaVenda(@RequestBody final ItemCarrinho[] itens) {
-
-    ArrayList<Produto> listaProdutos = new ArrayList<>();
-    ArrayList<Integer> listaQtdades = new ArrayList<>();
-
-    for (ItemCarrinho item : itens) {
-      final Produto produto =
-          produtos.stream().filter(p -> p.getCodigo() == item.getCodigo()).findAny().orElse(null);
-
-      if (produto == null) {
-        return false;
-      }
-
-      listaQtdades.add(item.getQuantidade());
-      listaProdutos.add(produto);
-    }
-
-    StringBuilder builder = new StringBuilder();
-
-    for (int i = 0; i < listaProdutos.size(); i++) {
-      final Produto produto = listaProdutos.get(i);
-      final int qtdade = listaQtdades.get(i);
-      produto.saidaDeProduto(qtdade);
-
-      builder.append(produto.getCodigo());
-      builder.append(" ");
-      builder.append(produto.getDescricao());
-      builder.append(" ");
-      builder.append(qtdade);
-      builder.append("\n");
-    }
-
-    vendasEfetuadas.add(builder.toString());
-    return true;
-  }
-
-  @GetMapping("/historico")
-  @CrossOrigin(origins = "*")
-  public List<String> vendasEfetuadas() {
-    return vendasEfetuadas;
+  public Boolean confirmaVenda(@RequestBody final ParamSubtotal_DTO dto) {
+    return cadastraVenda.executar(dto);
   }
 
   @PostMapping("/subtotal")
   @CrossOrigin(origins = "*")
-  public Integer[] calculaSubtotal(@RequestBody final ParamSubtotal_DTO param) {
-    Integer subtotal = 0;
-    Integer imposto = 0;
+  public Integer[] calculaSubtotal(@RequestBody final ParamSubtotal_DTO dto) {
+    return consultaVenda.executar(dto);
+  }
 
-    System.out.println(param.getEndereco());
+  @GetMapping("/historico")
+  @CrossOrigin(origins = "*")
+  public List<Venda> vendasEfetuadas() {
+    return consultaVendas.executar();
+  }
 
-    // Verifica se o endereço é invalido
-    if (param.getEndereco() == null || 
-        param.getEndereco().isEmpty() ||
-        param.getEndereco().isBlank()){
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Endereco invalido");
-    }
-    // Verifica se o endereço já está na cache
-    if (!cacheFrete.keySet().contains(param.getEndereco())){
-      // Calcula o frete 1,00 por km
-      // http://dev.virtualearth.net/REST/v1/Routes?waypoint.1=waypoint1&waypoint.2=waypoint2&distanceUnit=mi&o=json&c=en-GB&key=key
-
-      cacheFrete.put(param.getEndereco(),25);
-    }
-
-    for (final ItemCarrinho it : param.getItens()) {
-      // Procurar o produto pelo código
-      final Produto prod =
-          produtos.stream().filter(p -> p.getCodigo() == it.getCodigo()).findAny().orElse(null);
-
-      if (prod != null) {
-        subtotal += (int) (prod.getPreco() * it.getQuantidade());
-      } else {
-        throw new IllegalArgumentException("Codigo invalido");
-      }
-    }
-    imposto = (int) (subtotal * 0.1);
-    final Integer[] resp = new Integer[4];
-    resp[0] = subtotal;
-    resp[1] = imposto;
-    resp[2] = subtotal + imposto;
-    resp[3] = cacheFrete.get(param.getEndereco()); // Frete: custo fixo por enquanto
-    return resp;
-  }}
+  @PostMapping("/criarProdutos")
+  @CrossOrigin(origins = "*")
+  public void criarProdutos() {
+     cadastraProdutos.executar();
+  }
+}

@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class VendaRepository implements IVendaRepository {
-    VendaCrud vendaCRUD;
+    IVendaCrud vendaCRUD;
 
     @Autowired
-    public VendaRepository(VendaCrud vendaCRUD){
+    public VendaRepository(IVendaCrud vendaCRUD) {
         this.vendaCRUD = vendaCRUD;
     }
 
@@ -21,4 +21,11 @@ public class VendaRepository implements IVendaRepository {
     public List<Venda> todos() {
         return vendaCRUD.findAll();
     }
+
+    @Override
+    public boolean cadastra(Venda venda) {
+        vendaCRUD.save(venda);
+        return true;
+    }
+
 }

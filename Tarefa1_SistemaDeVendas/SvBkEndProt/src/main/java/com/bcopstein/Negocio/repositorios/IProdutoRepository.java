@@ -6,5 +6,6 @@ import com.bcopstein.Negocio.entidades.Produto;
 
 public interface IProdutoRepository {
     List<Produto> todos();
-    boolean podeVender(int codProd, int qtdade);
+
+    void criarProdutos();
 }

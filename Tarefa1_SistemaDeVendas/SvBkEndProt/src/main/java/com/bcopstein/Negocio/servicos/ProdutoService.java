@@ -22,5 +22,8 @@ public class ProdutoService {
         return repo.todos();
     }
     
+    public void criar(){
+        repo.criarProdutos();
+    }
     
 }
