@@ -3,6 +3,7 @@ package com.bcopstein.Adaptadores.controllers;
 import java.util.List;
 
 import com.bcopstein.Aplicacao.dtos.ParamSubtotal_DTO;
+import com.bcopstein.Aplicacao.casosDeUso.CadastraProdutos;
 import com.bcopstein.Aplicacao.casosDeUso.CadastraVendaUC;
 import com.bcopstein.Aplicacao.casosDeUso.ConsultaProdutosUC;
 import com.bcopstein.Aplicacao.casosDeUso.ConsultaVendaUC;
@@ -28,15 +29,17 @@ public class Controller {
   private ConsultaVendaUC consultaVenda;
   private ConsultaVendasUC consultaVendas;
   private ConsultaProdutosUC consultaProdutos;
+  private CadastraProdutos cadastraProdutos;
 
   @Autowired
   public Controller(VerificaEstoqueProdutoUC verificaEstoqueProdutoUC, CadastraVendaUC cadastraVenda,
-      ConsultaVendaUC consultaVenda, ConsultaVendasUC consultaVendas, ConsultaProdutosUC consultaProdutos) {
+      ConsultaVendaUC consultaVenda, ConsultaVendasUC consultaVendas, ConsultaProdutosUC consultaProdutos, CadastraProdutos cadastraProdutos) {
     this.verificaEstoqueProduto = verificaEstoqueProdutoUC;
     this.cadastraVenda = cadastraVenda;
     this.consultaVenda = consultaVenda;
     this.consultaVendas = consultaVendas;
     this.consultaProdutos = consultaProdutos;
+    this.cadastraProdutos = cadastraProdutos;
   }
 
   @GetMapping("/produtos")
@@ -71,7 +74,7 @@ public class Controller {
 
   @PostMapping("/criarProdutos")
   @CrossOrigin(origins = "*")
-  public List<Venda> criarProdutos() {
-    return consultaVendas.executar();
+  public void criarProdutos() {
+     cadastraProdutos.executar();
   }
 }

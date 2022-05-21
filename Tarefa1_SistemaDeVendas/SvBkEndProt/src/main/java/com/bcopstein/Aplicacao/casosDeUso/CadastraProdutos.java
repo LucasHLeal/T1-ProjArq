@@ -22,8 +22,9 @@ public class CadastraProdutos {
   private ServicoEstoque servicoEstoque;
 
   @Autowired
-  public CadastraProdutos(ProdutoService servicoProduto) {
+  public CadastraProdutos(ProdutoService servicoProduto, ServicoEstoque servicoEstoque) {
     this.servicoProduto = servicoProduto;
+    this.servicoEstoque = servicoEstoque;
   }
 
   public boolean executar() {

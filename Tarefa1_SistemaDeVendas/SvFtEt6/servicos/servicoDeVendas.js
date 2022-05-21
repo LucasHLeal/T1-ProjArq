@@ -40,7 +40,7 @@ class ServicoDeVendas {
     const lstItens = [];
 
     itens.forEach((item) => {
-      lstItens.push({ codigo: item.produto.codigo, quantidade: item.qtdade });
+      lstItens.push({ codigo: item.produto.codigo, codProduto: item.produto.codigo, precoProd: item.produto.preco, quantidade: item.qtdade });
     });
 
     const param = { itens:lstItens, endereco:endereco }
@@ -63,13 +63,15 @@ class ServicoDeVendas {
     return null;
   }
 
-  async confirmaVenda(itens) {
+  async confirmaVenda(itens,endereco) {
     const url = this.baseUrl + "/vendas/confirmacao";
-    const param = [];
+    const lstItens = [];
 
     itens.forEach((item) => {
-      param.push({ codigo: item.produto.codigo, quantidade: item.qtdade });
+      lstItens.push({ codigo: item.produto.codigo, codProduto: item.produto.codigo, precoProd: item.produto.preco, quantidade: item.qtdade });
     });
+
+    const param = { itens:lstItens, endereco:endereco }
 
     const otherParam = {
       headers: { "content-type": "application/json" },

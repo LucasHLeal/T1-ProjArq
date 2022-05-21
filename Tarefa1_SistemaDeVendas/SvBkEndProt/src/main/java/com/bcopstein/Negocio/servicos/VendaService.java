@@ -68,11 +68,13 @@ public class VendaService {
 
     imposto = calculoImposto.calculaImposto(itens);
 
-    final Integer[] resp = new Integer[3];
+    final Integer[] resp = new Integer[4];
 
     resp[0] = subtotal;
     resp[1] = imposto;
     resp[2] = subtotal + imposto;
+    resp[3] = 0; // frete
+    
 
     return resp;
   }
