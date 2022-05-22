@@ -88,7 +88,7 @@ class ServicoDeVendas {
     } catch (erro) {
       console.log(erro);
     }
-    return false;
+    return 2; // Internal server error.
   }
 
   async getProdutos() {

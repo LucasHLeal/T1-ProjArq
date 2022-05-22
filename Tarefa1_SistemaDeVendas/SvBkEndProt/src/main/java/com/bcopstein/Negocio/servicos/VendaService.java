@@ -2,8 +2,10 @@ package com.bcopstein.Negocio.servicos;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.time.LocalTime;
 import java.util.List;
 
+import com.bcopstein.Aplicacao.servicos.RestricaoVendaFactory;
 import com.bcopstein.Negocio.entidades.ItemCarrinho;
 import com.bcopstein.Negocio.entidades.ItemEstoque;
 import com.bcopstein.Negocio.entidades.Venda;
@@ -27,14 +29,13 @@ public class VendaService {
     this.calculoFrete = calculoFrete;
   }
 
-  public boolean cadastraVenda(Venda novaVenda) {
-    // TODO: Ver isso aqui (Horario) !!!
-    // IRestricaoHorarioVenda restricaoVenda = RestricaoVendaFactory.getInstance(LocalTime.now());
-    // boolean vendaIsValida = restricaoVenda.vendaIsValida(novaVenda);
+  public Integer cadastraVenda(Venda novaVenda) {
+    IRestricaoHorarioVenda restricaoVenda = RestricaoVendaFactory.getInstance(LocalTime.now());
+    boolean vendaIsValida = restricaoVenda.vendaIsValida(novaVenda);
 
-    // if (!vendaIsValida) {
-    //   return false;
-    // }
+    if (!vendaIsValida) {
+      return 1;
+    }
 
     List<ItemCarrinho> produtos = novaVenda.getItensCarrinho();
 
@@ -42,7 +43,7 @@ public class VendaService {
       boolean podeVender = servicoEstoque.podeVender(produto.getCodProduto(), produto.getQuantidade());
 
       if (!podeVender) {
-        return false;
+        return 2;
       }
     }
 
@@ -54,7 +55,7 @@ public class VendaService {
 
     this.vendaRepository.cadastra(novaVenda);
 
-    return true;
+    return 0;
   }
 
   public Integer[] consultaVenda(List<ItemCarrinho> itens, String endereco) {
@@ -71,6 +72,11 @@ public class VendaService {
     }
 
     imposto = calculoImposto.calculaImposto(itens);
+
+    if (endereco.equalsIgnoreCase("")){
+        endereco = "portoalegre";
+    }
+
     try {
       frete = calculoFrete.calculaFrete("portoalegre", endereco);
     } catch (URISyntaxException e) {

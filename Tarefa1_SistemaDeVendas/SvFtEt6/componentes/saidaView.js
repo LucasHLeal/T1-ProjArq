@@ -19,6 +19,10 @@ class SaidaView {
     this.root.innerHTML = this.icOk + " Venda conclu&iacute;da com sucesso";
   }
 
+  horarioInvalido() {
+    this.root.innerHTML = this.icError + " Nao foi possivel concluir sua compra devido ao horario";
+  }
+
   limpar() {
     this.root.innerHTML = "N&atilde;o h&aacute; nenhuma sa&iacute;da";
   }

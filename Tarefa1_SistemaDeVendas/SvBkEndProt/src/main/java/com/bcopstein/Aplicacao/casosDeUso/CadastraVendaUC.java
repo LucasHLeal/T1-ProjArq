@@ -24,7 +24,7 @@ public class CadastraVendaUC {
     this.servicoProduto = servicoProduto;
   }
 
-  public boolean executar(ParamSubtotal_DTO dto) {
+  public Integer executar(ParamSubtotal_DTO dto) {
 
     List<ItemCarrinho> itens = new ArrayList<>(0);
     List<Produto> produtos = servicoProduto.todos();

@@ -12,7 +12,7 @@ public class RestricaoVendaFactory {
     if (horaRestricao.isAfter(HORARIO_ABERTURA) && horaRestricao.isBefore(HORARIO_FECHAMENTO)) {
       return new HorarioNormal();
     } else {
-      return new HorarioPertoDoLimite();
+      return new HorarioFechado();
     }
   }
 }

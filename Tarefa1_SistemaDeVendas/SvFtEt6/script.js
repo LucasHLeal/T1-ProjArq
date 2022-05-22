@@ -96,8 +96,10 @@ async function checkout() {
 
   console.log(confirmou);
 
-  if (confirmou) {
+  if (confirmou == 0) {
     saida.vendaSucesso();
+  } else if (confirmou == 1) {
+    saida.horarioInvalido();
   } else {
     saida.erroInternoDoServidor();
   }

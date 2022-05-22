@@ -56,7 +56,7 @@ public class Controller {
 
   @PostMapping("/confirmacao")
   @CrossOrigin(origins = "*")
-  public Boolean confirmaVenda(@RequestBody final ParamSubtotal_DTO dto) {
+  public Integer confirmaVenda(@RequestBody final ParamSubtotal_DTO dto) {
     return cadastraVenda.executar(dto);
   }
 
@@ -75,6 +75,6 @@ public class Controller {
   @PostMapping("/criarProdutos")
   @CrossOrigin(origins = "*")
   public void criarProdutos() {
-     cadastraProdutos.executar();
+    cadastraProdutos.executar();
   }
 }
