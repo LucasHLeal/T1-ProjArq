@@ -1,16 +1,16 @@
 package com.bcopstein.Aplicacao.casosDeUso;
 
-import com.bcopstein.Negocio.servicos.ServicoEstoque;
+import com.bcopstein.Negocio.servicos.EstoqueService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class VerificaEstoqueProdutoUC {
-  private ServicoEstoque servicoEstoque;
+  private EstoqueService servicoEstoque;
 
   @Autowired
-  public VerificaEstoqueProdutoUC(ServicoEstoque servicoEstoque) {
+  public VerificaEstoqueProdutoUC(EstoqueService servicoEstoque) {
     this.servicoEstoque = servicoEstoque;
   }
 

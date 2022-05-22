@@ -18,11 +18,11 @@ import org.springframework.stereotype.Component;
 public class VendaService {
   private IVendaRepository vendaRepository;
   private ICalculoImposto calculoImposto;
-  private ServicoEstoque servicoEstoque;
+  private EstoqueService servicoEstoque;
   private ICalculoFrete calculoFrete;
 
   @Autowired
-  public VendaService(IVendaRepository vendaRepository, ICalculoImposto calculoImposto, ServicoEstoque servicoEstoque, ICalculoFrete calculoFrete) {
+  public VendaService(IVendaRepository vendaRepository, ICalculoImposto calculoImposto, EstoqueService servicoEstoque, ICalculoFrete calculoFrete) {
     this.vendaRepository = vendaRepository;
     this.calculoImposto = calculoImposto;
     this.servicoEstoque = servicoEstoque;

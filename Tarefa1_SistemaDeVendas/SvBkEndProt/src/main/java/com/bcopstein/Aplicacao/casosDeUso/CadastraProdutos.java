@@ -8,7 +8,7 @@ import com.bcopstein.Negocio.entidades.ItemEstoque;
 import com.bcopstein.Negocio.entidades.Produto;
 import com.bcopstein.Negocio.entidades.Venda;
 import com.bcopstein.Negocio.servicos.ProdutoService;
-import com.bcopstein.Negocio.servicos.ServicoEstoque;
+import com.bcopstein.Negocio.servicos.EstoqueService;
 import com.bcopstein.Negocio.servicos.VendaService;
 import com.bcopstein.Adaptadores.repositorios.EstoqueRepository;
 import com.bcopstein.Aplicacao.dtos.*;
@@ -19,10 +19,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class CadastraProdutos {
   private ProdutoService servicoProduto;
-  private ServicoEstoque servicoEstoque;
+  private EstoqueService servicoEstoque;
 
   @Autowired
-  public CadastraProdutos(ProdutoService servicoProduto, ServicoEstoque servicoEstoque) {
+  public CadastraProdutos(ProdutoService servicoProduto, EstoqueService servicoEstoque) {
     this.servicoProduto = servicoProduto;
     this.servicoEstoque = servicoEstoque;
   }
