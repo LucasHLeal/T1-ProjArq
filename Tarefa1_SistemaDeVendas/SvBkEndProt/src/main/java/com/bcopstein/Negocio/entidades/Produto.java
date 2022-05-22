@@ -36,6 +36,10 @@ public class Produto {
     this.preco = preco;
   }
 
+  public void setCodigo(Integer codigo) { this.codigo = codigo; }
+
+  public void setDescricao(String descricao) { this.descricao = descricao; }
+
   @Override
   public String toString() {
     return "Produto [codigo=" + codigo + ", descricao=" + descricao + ", preco=" + preco + "]";

@@ -30,12 +30,12 @@ public class VendaService {
   }
 
   public Integer cadastraVenda(Venda novaVenda) {
-    IRestricaoHorarioVenda restricaoVenda = RestricaoVendaFactory.getInstance(LocalTime.now());
-    boolean vendaIsValida = restricaoVenda.vendaIsValida(novaVenda);
-
-    if (!vendaIsValida) {
-      return 1;
-    }
+//    IRestricaoHorarioVenda restricaoVenda = RestricaoVendaFactory.getInstance(LocalTime.now());
+//    boolean vendaIsValida = restricaoVenda.vendaIsValida(novaVenda);
+//
+//    if (!vendaIsValida) {
+//      return 1;
+//    }
 
     List<ItemCarrinho> produtos = novaVenda.getItensCarrinho();
 
