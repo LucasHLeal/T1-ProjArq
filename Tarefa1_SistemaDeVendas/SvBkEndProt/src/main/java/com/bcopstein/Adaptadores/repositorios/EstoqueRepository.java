@@ -1,6 +1,5 @@
 package com.bcopstein.Adaptadores.repositorios;
 
-// import com.bcopstein.Adaptadores.repositorios.IEstoqueRepositoryJPA;
 import com.bcopstein.Negocio.entidades.ItemEstoque;
 import com.bcopstein.Negocio.repositorios.IEstoqueRepository;
 
@@ -10,10 +9,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class EstoqueRepository implements IEstoqueRepository {
 
-  private IEstoqueRepositoryJPA estoqueRepository;
+  private IEstoqueRepositoryCrud estoqueRepository;
 
   @Autowired
-  public EstoqueRepository(IEstoqueRepositoryJPA estoqueRepository) {
+  public EstoqueRepository(IEstoqueRepositoryCrud estoqueRepository) {
     this.estoqueRepository = estoqueRepository;
   }
 
