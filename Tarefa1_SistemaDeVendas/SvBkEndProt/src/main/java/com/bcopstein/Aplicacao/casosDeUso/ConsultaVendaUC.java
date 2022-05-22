@@ -33,6 +33,6 @@ public class ConsultaVendaUC {
           item.getQuantidade()));
     }
 
-    return servicoVenda.consultaVenda(itens);
+    return servicoVenda.consultaVenda(itens,dto.getEndereco());
   }
 }

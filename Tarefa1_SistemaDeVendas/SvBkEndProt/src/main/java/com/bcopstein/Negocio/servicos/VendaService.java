@@ -1,8 +1,9 @@
 package com.bcopstein.Negocio.servicos;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
-import com.bcopstein.Negocio.repositorios.ICalculoImposto;
 import com.bcopstein.Negocio.entidades.ItemCarrinho;
 import com.bcopstein.Negocio.entidades.ItemEstoque;
 import com.bcopstein.Negocio.entidades.Venda;
@@ -16,12 +17,14 @@ public class VendaService {
   private IVendaRepository vendaRepository;
   private ICalculoImposto calculoImposto;
   private ServicoEstoque servicoEstoque;
+  private ICalculoFrete calculoFrete;
 
   @Autowired
-  public VendaService(IVendaRepository vendaRepository, ICalculoImposto calculoImposto, ServicoEstoque servicoEstoque) {
+  public VendaService(IVendaRepository vendaRepository, ICalculoImposto calculoImposto, ServicoEstoque servicoEstoque, ICalculoFrete calculoFrete) {
     this.vendaRepository = vendaRepository;
     this.calculoImposto = calculoImposto;
     this.servicoEstoque = servicoEstoque;
+    this.calculoFrete = calculoFrete;
   }
 
   public boolean cadastraVenda(Venda novaVenda) {
@@ -54,9 +57,10 @@ public class VendaService {
     return true;
   }
 
-  public Integer[] consultaVenda(List<ItemCarrinho> itens) {
+  public Integer[] consultaVenda(List<ItemCarrinho> itens, String endereco) {
     Integer subtotal = 0;
     Integer imposto = 0;
+    Double frete = 0.0;
 
     for (final ItemCarrinho prod : itens) {
       if (prod != null) {
@@ -67,13 +71,25 @@ public class VendaService {
     }
 
     imposto = calculoImposto.calculaImposto(itens);
-
+    try {
+      frete = calculoFrete.calculaFrete("portoalegre", endereco);
+    } catch (URISyntaxException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (InterruptedException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
     final Integer[] resp = new Integer[4];
+    int freteInt = (int) Math.ceil(frete);
 
     resp[0] = subtotal;
     resp[1] = imposto;
-    resp[2] = subtotal + imposto;
-    resp[3] = 0; // frete
+    resp[2] = subtotal + imposto + freteInt;
+    resp[3] = freteInt;
     
 
     return resp;

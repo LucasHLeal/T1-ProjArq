@@ -35,7 +35,7 @@ public class CadastraVendaUC {
           item.getQuantidade()));
     }
 
-    Integer[] valores = servicoVenda.consultaVenda(itens);
+    Integer[] valores = servicoVenda.consultaVenda(itens , dto.getEndereco());
     Venda novaVenda = new Venda(valores[0], valores[1], valores[2], itens);
     return servicoVenda.cadastraVenda(novaVenda);
   }

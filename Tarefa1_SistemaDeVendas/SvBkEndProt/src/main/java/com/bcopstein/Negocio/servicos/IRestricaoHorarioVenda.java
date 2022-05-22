@@ -1,4 +1,4 @@
-package com.bcopstein.Negocio.repositorios;
+package com.bcopstein.Negocio.servicos;
 
 import com.bcopstein.Negocio.entidades.Venda;
 
