@@ -15,3 +15,4 @@ public class SvBkPrototipo {
     SpringApplication.run(SvBkPrototipo.class, args);
   }
 }
+//file:///C:/Users/Miguel_Castro/Desktop/Pucrs/T1-ProjArq/Tarefa1_SistemaDeVendas/SvFtEt6/index.html

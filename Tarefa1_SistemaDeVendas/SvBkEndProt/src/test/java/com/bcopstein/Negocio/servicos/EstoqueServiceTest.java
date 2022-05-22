@@ -13,10 +13,10 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-public class ServicoEstoqueTest {
+public class EstoqueServiceTest {
 
     @InjectMocks
-    private ServicoEstoque servicoEstoque;
+    private EstoqueService estoqueService;
 
     @Mock
     private IEstoqueRepository estoqueRepository;
@@ -41,7 +41,7 @@ public class ServicoEstoqueTest {
         when(estoqueRepository.getProduto(codProduto)).thenReturn(itemEstoque);
 
         // THEN
-        Assertions.assertTrue(servicoEstoque.podeVender(codProduto,quantidade));
+        Assertions.assertTrue(estoqueService.podeVender(codProduto,quantidade));
     }
 
     @Test
@@ -54,13 +54,13 @@ public class ServicoEstoqueTest {
         when(estoqueRepository.getProduto(codProduto)).thenReturn(itemEstoque);
 
         // THEN
-        Assertions.assertFalse(servicoEstoque.podeVender(codProduto,quantidade));
+        Assertions.assertFalse(estoqueService.podeVender(codProduto,quantidade));
     }
 
     @Test
     public void mustUpdateProduto(){
         // TODO: VER
-        servicoEstoque.atualizaProduto(itemEstoque);
+        estoqueService.atualizaProduto(itemEstoque);
     }
 
     @Test
@@ -72,6 +72,6 @@ public class ServicoEstoqueTest {
         when(estoqueRepository.getProduto(codProduto)).thenReturn(itemEstoque);
 
         // THEN
-        assertEquals(itemEstoque, servicoEstoque.getProduto(codProduto));
+        assertEquals(itemEstoque, estoqueService.getProduto(codProduto));
     }
 }

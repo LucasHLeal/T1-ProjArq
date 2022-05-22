@@ -37,7 +37,7 @@ public class VendaServiceTest {
     private ICalculoImposto calculoImposto;
 
     @Mock
-    private ServicoEstoque servicoEstoque;
+    private EstoqueService estoqueService;
 
     @Mock
     private ICalculoFrete calculoFrete;
@@ -77,11 +77,11 @@ public class VendaServiceTest {
 
         // WHEN
         for (ItemCarrinho produto : itensCarrinho1) {
-            when(servicoEstoque.podeVender(produto.getCodProduto(), produto.getQuantidade())).thenReturn(true);
+            when(estoqueService.podeVender(produto.getCodProduto(), produto.getQuantidade())).thenReturn(true);
         }
 
         for (ItemCarrinho produto : itensCarrinho1) {
-            when(servicoEstoque.getProduto(produto.getCodProduto())).thenReturn(itemEstoque);
+            when(estoqueService.getProduto(produto.getCodProduto())).thenReturn(itemEstoque);
         }
 
         // THEN
@@ -106,7 +106,7 @@ public class VendaServiceTest {
 
         // WHEN
         for (ItemCarrinho produto : itensCarrinho1) {
-            when(servicoEstoque.podeVender(produto.getCodProduto(), produto.getQuantidade())).thenReturn(false);
+            when(estoqueService.podeVender(produto.getCodProduto(), produto.getQuantidade())).thenReturn(false);
         }
 
         // THEN

@@ -17,9 +17,9 @@ public class ItemCarrinho {
   private Integer precoProd;
   private int quantidade;
 
-  public ItemCarrinho(Integer codProduto, Integer precoUnitario, int quantidade) {
+  public ItemCarrinho(Integer codProduto, Integer precoProd, int quantidade) {
     this.codProduto = codProduto;
-    this.precoProd = precoUnitario;
+    this.precoProd = precoProd;
     this.quantidade = quantidade;
   }
 
@@ -55,7 +55,7 @@ public class ItemCarrinho {
 
   @Override
   public String toString() {
-    return "ItemCarrinho [codProduto=" + codProduto + ", codigo=" + codigo + ", precoUnitario=" + precoProd
+    return "ItemCarrinho [codProduto=" + codProduto + ", codigo=" + codigo + ", precoProd=" + precoProd
         + ", quantidade=" + quantidade + "]";
   }
 }

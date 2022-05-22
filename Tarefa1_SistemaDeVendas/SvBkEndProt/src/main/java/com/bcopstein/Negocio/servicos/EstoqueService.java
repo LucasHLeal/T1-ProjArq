@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ServicoEstoque {
+public class EstoqueService {
 
   private IEstoqueRepository estoqueRepository;
 
   @Autowired
-  public ServicoEstoque(IEstoqueRepository estoqueRepository) {
+  public EstoqueService(IEstoqueRepository estoqueRepository) {
     this.estoqueRepository = estoqueRepository;
   }
 

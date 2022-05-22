@@ -34,6 +34,6 @@ public class ItemCarrinhoTest {
     @Test
     public void testToString() {
         itemCarrinho = new ItemCarrinho(1,10,5);
-        assertEquals("ItemCarrinho [codProduto=1, codigo=null, precoUnitario=10, quantidade=5]", itemCarrinho.toString());
+        assertEquals("ItemCarrinho [codProduto=1, codigo=null, precoProd=10, quantidade=5]", itemCarrinho.toString());
     }
 }
