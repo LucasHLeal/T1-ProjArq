@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class VendaRepository implements IVendaRepository {
-    IVendaCrud vendaCRUD;
+    IVendaCRUD vendaCRUD;
 
     @Autowired
-    public VendaRepository(IVendaCrud vendaCRUD) {
+    public VendaRepository(IVendaCRUD vendaCRUD) {
         this.vendaCRUD = vendaCRUD;
     }
 
