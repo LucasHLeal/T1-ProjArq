@@ -26,7 +26,7 @@ docker build -t nota:latest .
 
 cd ../..
 
-# PORT 8000
+# PORT 8080
 cd Tarefa1_SistemaDeVendas/SvBkEndProt
 mvn clean package
 docker build -t prototipo:latest .
